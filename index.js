@@ -8,12 +8,16 @@ import authRoute from "./src/routes/auth.route.js";
 import newsRoute from "./src/routes/news.route.js";
 import swaggerRoute from "./src/routes/swagger.route.cjs";
 
-dotenv.config();
-
 const port = process.env.PORT || 3000;
 const app = express();
 
-app.use(cors());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  app.use(cors());
+  next();
+});
+
+dotenv.config();
 
 connectDatabase();
 app.use(express.json());
