@@ -8,15 +8,16 @@ import authRoute from "./src/routes/auth.route.js";
 import newsRoute from "./src/routes/news.route.js";
 import swaggerRoute from "./src/routes/swagger.route.cjs";
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const app = express();
 
+app.use(express.json());
 app.use(cors());
 
 dotenv.config();
 
 connectDatabase();
-app.use(express.json());
+
 app.use("/user", userRoute);
 app.use("/auth", authRoute);
 app.use("/news", newsRoute);
